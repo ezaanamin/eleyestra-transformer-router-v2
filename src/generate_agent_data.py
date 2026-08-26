@@ -305,20 +305,16 @@ def _generate_queries(
         tqdm.write(f"\n{sep}")
         tqdm.write(f"📤 PROMPT  [query {i+1}/{n}]  mode={mode_name}")
         tqdm.write(sep)
-        tqdm.write(anchor_text)
+        tqdm.write(f"[REDACTED ANCHOR TEXT - Length: {len(anchor_text)}]")
         tqdm.write("\n--- STYLE EXAMPLES ---")
-        tqdm.write(style_block)
-        if already_block:
-            tqdm.write(already_block)
-        if banned_block:
-            tqdm.write(banned_block)
+        tqdm.write(f"[REDACTED STYLE EXAMPLES - Length: {len(style_block)}]")
         tqdm.write(sep)
 
         query = None
         for _ in range(3):   # up to 3 dedup retries
             candidate = _call_llm(system_prompt, user_prompt)
             if candidate:
-                tqdm.write(f"✅ RESPONSE: {candidate}")
+                tqdm.write(f"✅ RESPONSE: [Length: {len(candidate)}]")
             if candidate and not any(_too_similar(candidate, g) for g in generated):
                 query = candidate
                 break
@@ -508,7 +504,7 @@ def run_pipeline(
                     for r in item_rows:
                         tqdm.write(
                             f"  💬 [{r['action_type']}] "
-                            f"[{r['source_summary']}] {r['prompt'][:80]}"
+                            f"[Length: {len(r['prompt'])}]"
                         )
                     if len(rows) - last_save >= save_every:
                         pd.DataFrame(rows).to_csv(out_path, index=False)

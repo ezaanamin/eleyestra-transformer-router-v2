@@ -531,7 +531,7 @@ def main():
 
                     with lock:
                         for row in new_rows:
-                            tqdm.write(f"  💬 {row['prompt'][:80]}")
+                            tqdm.write(f"  💬 Generated Prompt [Length: {len(row['prompt'])}]")
                         all_rows.extend(new_rows)
                         
                         remaining = max(pbar.total - pbar.n, 0)
