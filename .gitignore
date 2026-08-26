@@ -1,0 +1,37 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Private datasets
+data/
+data/private/
+data/raw/
+data/processed/
+*.csv
+*.json
+*.jsonl
+*.parquet
+
+# Generated outputs
+outputs/
+results/
+logs/
+
+# Model artifacts
+checkpoints/
+models/
+*.pt
+*.pth
+*.bin
+
+# Python standard
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+.env/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
